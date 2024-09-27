@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+body {
+  background-color: #f0f0f0; /* Light gray background */
+  font-family: Arial, sans-serif; /* Default font for the app */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.editor {
+  border: 1px solid #ddd; /* Border for the editor */
+  border-radius: 4px; /* Rounded corners */
+  padding: 20px; /* Spacing inside the editor */
+  min-height: 300px; /* Minimum height for the editor area */
+  background-color: #fff; /* White background */
+  cursor: text; /* Cursor changes to text when hovering */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.autocomplete-suggestions {
+  position: absolute;
+  background: #ffffff; /* Background color of the suggestions box */
+  border: 1px solid #ccc; /* Border around the suggestions box */
+  border-radius: 4px; /* Rounded corners */
+  max-height: 150px; /* Maximum height for the suggestions box */
+  overflow-y: auto; /* Scrollable if content exceeds max height */
+  z-index: 10; /* Ensure it appears above other content */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.autocomplete-suggestion {
+  padding: 8px 12px; /* Padding inside each suggestion */
+  cursor: pointer; /* Cursor changes to pointer */
 }
 
-.App-link {
-  color: #61dafb;
+.autocomplete-suggestion.highlighted {
+  background-color: #007bff; /* Background color for highlighted suggestion */
+  color: #ffffff; /* Text color for highlighted suggestion */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.autocomplete-suggestion:not(.highlighted):hover {
+  background-color: #f0f0f0; /* Background color for hovered suggestion */
 }
+
