@@ -1,11 +1,11 @@
 // src/components/Editor.js
 import React, { useEffect, useRef } from 'react';
 import { EditorState } from 'prosemirror-state';
-import { EditorView, basicSetup } from 'prosemirror-view';
-import { Schema, DOMParser } from 'prosemirror-model';
+import { EditorView } from 'prosemirror-view';
 import { schema } from 'prosemirror-schema-basic';
 import { keymap } from 'prosemirror-keymap';
 import { history } from 'prosemirror-history';
+import autocompletePlugin from '../plugins/autocompletePlugin'; // Import the autocomplete plugin
 
 const Editor = () => {
   const editorRef = useRef();
@@ -17,7 +17,8 @@ const Editor = () => {
       schema,
       plugins: [
         keymap({ "Mod-z": history.undo, "Mod-y": history.redo }),
-        history()
+        history(),
+        autocompletePlugin // Add the autocomplete plugin here
       ],
     });
 
