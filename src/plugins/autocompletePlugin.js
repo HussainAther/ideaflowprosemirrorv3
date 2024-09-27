@@ -1,6 +1,5 @@
-import { Plugin, TextSelection } from 'prosemirror-state';
-import { Decoration, DecorationSet } from 'prosemirror-view';
-import { fakeData } from '../data/fakeData';
+import { Plugin, Decoration, DecorationSet } from 'prosemirror-state';
+import { fakeData } from '../data/fakeData'; // Import fake data for suggestions
 
 // Function to find the trigger character in the text
 function findTrigger(state, triggers) {
@@ -17,11 +16,13 @@ function findTrigger(state, triggers) {
     }
   });
 
+  console.log('Trigger detected:', { triggerChar, triggerPos });
   return { triggerPos, triggerChar };
 }
 
 // Function to get suggestions based on trigger and match string
 function getSuggestions(triggerChar, match) {
+  console.log(`Getting suggestions for: ${triggerChar}${match}`);
   switch (triggerChar) {
     case '#':
       return fakeData.hashtags.filter(item => item.startsWith(`#${match}`));
@@ -50,6 +51,7 @@ const autocompletePlugin = new Plugin({
       if (triggerPos !== -1) {
         const match = tr.doc.textBetween(triggerPos + 1, tr.selection.from, null, '\ufffc');
         const suggestions = getSuggestions(triggerChar, match);
+        console.log('Suggestions found:', suggestions);
         return { active: true, triggerPos, triggerChar, suggestions, match };
       }
       return { ...prev, active: false };
@@ -81,13 +83,18 @@ const autocompletePlugin = new Plugin({
       if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
         // Handle navigation
         event.preventDefault();
+        console.log('Navigating suggestions...');
+        // Add logic for handling navigation (highlighting suggestions)
         return true;
       } else if (event.key === 'Enter' || event.key === 'Tab') {
         // Handle selection
         event.preventDefault();
-        view.dispatch(
-          view.state.tr.replaceWith(triggerPos + 1, view.state.selection.to, view.state.schema.text(suggestions[0]))
-        );
+        if (suggestions.length > 0) {
+          view.dispatch(
+            view.state.tr.replaceWith(triggerPos + 1, view.state.selection.to, view.state.schema.text(suggestions[0]))
+          );
+          console.log(`Selected suggestion: ${suggestions[0]}`);
+        }
         return true;
       }
       return false;
