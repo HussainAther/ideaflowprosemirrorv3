@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# ProseMirror Autocomplete Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full-stack application using [ProseMirror](https://prosemirror.net/) to create a text editor with custom autocomplete functionality for hashtags, mentions, and related ideas. It is designed to behave like a typical text input box but with enhanced features for autocomplete. The project is deployed on AWS Amplify and integrates a backend for serving fake autocomplete data.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Text Input with Autocomplete**: Supports autocomplete for:
+  - `#` hashtags
+  - `@` mentions
+  - `<>` related ideas
+- **Dynamic Suggestions**: Autocomplete suggestions appear dynamically based on user input.
+- **Keyboard Navigation**: Navigate through suggestions using arrow keys and select with `Enter` or `Tab`.
+- **Non-Editable Entries**: Autocompleted entries are inserted as non-editable elements.
+- **Multiple Autocompletes**: Supports simultaneous autocompletes within the same text input.
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+prosemirror-autocomplete/
+│
+├── src/
+│   ├── components/
+│   │   └── Editor.js             # ProseMirror editor component with autocomplete functionality
+│   ├── plugins/
+│   │   └── autocompletePlugin.js # Custom plugin to handle autocomplete logic
+│   ├── data/
+│   │   └── fakeData.js           # Fake data for autocomplete suggestions
+│   ├── App.js                    # Main React component for the app
+│   ├── App.css                   # Styles specific to the App component
+│   ├── index.js                  # Entry point for the React app
+│   ├── index.css                 # Global styles for the app
+│   └── reportWebVitals.js        # Optional performance monitoring
+│
+├── amplify/                      # AWS Amplify configuration
+├── .gitignore                    # Files and directories to be ignored by Git
+├── README.md                     # Project documentation
+├── package.json                  # Project dependencies and scripts
+└── package-lock.json             # Locked versions of dependencies
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (version 14 or higher)
+- npm or yarn
+- AWS CLI and Amplify CLI (for deployment)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/prosemirror-autocomplete.git
+   cd prosemirror-autocomplete
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install dependencies**:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3. **Start the development server**:
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+   This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. **Initialize AWS Amplify**:
+   ```bash
+   amplify init
+   ```
 
-### `npm run build` fails to minify
+2. **Deploy the app**:
+   ```bash
+   amplify add hosting
+   amplify publish
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. **Set up the backend**:
+   Configure a Lambda function or any backend service to provide fake data for autocomplete suggestions.
+
+## Customizing the Editor
+
+### Adding New Autocomplete Triggers
+
+To add new triggers, modify the `autocompletePlugin.js` file and update the logic for detecting new patterns.
+
+### Customizing Styles
+
+You can customize the editor styles by modifying the `App.css` file or creating additional CSS files as needed.
+
+## Troubleshooting
+
+- **Autocomplete Suggestions Not Showing**: Check if the `fakeData.js` file has the correct format and if the plugin is correctly integrated with the editor.
+- **Keyboard Navigation Issues**: Verify the key event handlers in the `autocompletePlugin.js` file and ensure there are no conflicts.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or inquiries, please contact us at:
+- careers@ideapad.io
+- jacob@ideapad.io
