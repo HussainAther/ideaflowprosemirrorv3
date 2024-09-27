@@ -1,6 +1,6 @@
 import { Plugin, TextSelection } from 'prosemirror-state';
 import { Decoration, DecorationSet } from 'prosemirror-view';
-import { fakeData } from '../data/fakeData'; // Import fake data for suggestions
+import { fakeData } from '../data/fakeData';
 
 // Function to find the trigger character in the text
 function findTrigger(state, triggers) {
@@ -34,7 +34,6 @@ function getSuggestions(triggerChar, match) {
   }
 }
 
-// Autocomplete Plugin
 const autocompletePlugin = new Plugin({
   state: {
     init() {
