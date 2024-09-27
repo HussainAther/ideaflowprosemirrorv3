@@ -34,14 +34,5 @@ const Editor = () => {
   return <div ref={editorRef} className="editor"></div>;
 };
 
-const state = EditorState.create({
-  schema,
-  plugins: [
-    keymap({ "Mod-z": history.undo, "Mod-y": history.redo }),
-    history(),
-    autocompletePlugin  // Ensure the plugin is included here
-  ],
-});
-
 export default Editor;
 
