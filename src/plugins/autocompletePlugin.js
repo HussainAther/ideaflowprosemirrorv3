@@ -1,4 +1,5 @@
-import { Plugin, Decoration, DecorationSet } from 'prosemirror-state';
+import { Plugin } from 'prosemirror-state';
+import { Decoration, DecorationSet } from 'prosemirror-view'; // Corrected import for Decoration and DecorationSet
 import { fakeData } from '../data/fakeData'; // Import fake data for suggestions
 
 // Function to find the trigger character in the text
